@@ -1142,7 +1142,7 @@ function getPool(s) {
   if(s==='katakana') return KT;
   if(s==='both') return [...H,...KT];
   if(s==='kanji') return KANJI.map(x=>({k:x.k,r:x.e,h:x.h,t:x.t}));
-  if(s==='vocab') return VOCAB.map(v=>({k:v.h, r:v.e, jp:v.jp, romaji:v.r, type:'vocab'}));
+  if(s==='vocab') return VOCAB.map(v=>({k:v.h, t:v.t, r:v.e, jp:v.jp, romaji:v.r, type:'vocab'}));
 }
 function setSet(s, btn) {
   qSet=s;
@@ -1164,7 +1164,7 @@ function nextQ() {
   document.getElementById('cq').textContent=cur.k;
   document.getElementById('ca').textContent=cur.r;
   if(cur.type === 'vocab') {
-    document.getElementById('ca2').textContent = `漢字: ${cur.jp} | Romaji: ${cur.romaji}`;
+    document.getElementById('ca2').textContent = `Katakana: ${cur.t} | Romaji: ${cur.romaji}`;
   } else {
     document.getElementById('ca2').textContent=cur.h?`ひ: ${cur.h}　カ: ${cur.t}`:'';
   }
