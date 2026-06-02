@@ -551,6 +551,7 @@ header {
     <button class="tog" onclick="setSet('katakana',this)">Katakana</button>
     <button class="tog" onclick="setSet('both',this)">Both Scripts</button>
     <button class="tog" onclick="setSet('kanji',this)">Kanji Meanings</button>
+    <button class="tog" onclick="setSet('vocab',this)">Vocabulary</button> </div>
   </div>
   <div class="score-bar">
     <div class="score-item"><div class="dot g"></div><span id="qc">0</span>&nbsp;correct</div>
@@ -767,7 +768,7 @@ const KT = [
 ];
 
 // ═══════════════════════════════════════
-//  DATA — 120 Kanji
+//  DATA — 200 Kanji
 //  fields: k=char, h=hiragana, t=katakana, e=english, c=category, rad=radical hint
 // ═══════════════════════════════════════
 const KANJI = [
@@ -1141,6 +1142,7 @@ function getPool(s) {
   if(s==='katakana') return KT;
   if(s==='both') return [...H,...KT];
   if(s==='kanji') return KANJI.map(x=>({k:x.k,r:x.e,h:x.h,t:x.t}));
+  if(s==='vocab') return VOCAB.map(v=>({k:v.h, r:v.e, jp:v.jp, romaji:v.r, type:'vocab'}));
 }
 function setSet(s, btn) {
   qSet=s;
@@ -1161,7 +1163,11 @@ function nextQ() {
   cur=pool.pop(); seen.add(cur.k);
   document.getElementById('cq').textContent=cur.k;
   document.getElementById('ca').textContent=cur.r;
-  document.getElementById('ca2').textContent=cur.h?`ひ: ${cur.h}　カ: ${cur.t}`:'';
+  if(cur.type === 'vocab') {
+    document.getElementById('ca2').textContent = `漢字: ${cur.jp} | Romaji: ${cur.romaji}`;
+  } else {
+    document.getElementById('ca2').textContent=cur.h?`ひ: ${cur.h}　カ: ${cur.t}`:'';
+  }
   document.getElementById('qpool').textContent=`Pool: ${pool.length+1}`;
   buildChoices(); updateScore();
 }
