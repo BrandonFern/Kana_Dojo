@@ -1677,10 +1677,12 @@ function bfSubmit() {
     if(p){ p.classList.add('show'); bf.hintVisible=true; }
     btn.textContent = 'Try again';
     btn.onclick = ()=>{
-      inp2.value=''; inp2.classList.remove('no'); card.classList.remove('wrong-flash');
-      fb.textContent=''; bf.inputLocked=false;
-      inp2.focus();
-    };
+  inp2.value=''; inp2.classList.remove('no'); card.classList.remove('wrong-flash');
+  fb.textContent=''; bf.inputLocked=false;
+  btn.textContent='Submit';
+  btn.onclick=bfSubmit;
+  inp2.focus();
+};
   }
 }
 
@@ -1709,7 +1711,7 @@ function bfMarkSetMastered(idx) {
         Want to test your memory across multiple sets? Try <strong>Phase 3 — Cumulative Quiz</strong> below.
       </div>
       <div class="bf-complete-actions">
-        <button class="btn-ghost" onclick="bfSelectSet(${idx})">Re-drill this set</button>
+        <button class="btn-ghost" onclick="bf.setStatus[${idx}]={phase:'untouched',mastered:false};bfSelectSet(${idx});buildBFSetList()">Re-drill this set</button>
         ${nextIdx>=0?`<button class="btn-ink" style="background:var(--bf-accent)" onclick="bfSelectSet(${nextIdx})">Next: Set ${nextIdx+1} &#8594;</button>`:''}
         <button class="btn-gold" onclick="document.getElementById('bf-p3-panel').scrollIntoView({behavior:'smooth'})">Go to Phase 3 &#8595;</button>
       </div>
@@ -2451,8 +2453,13 @@ function wbfSubmit(){
     fb.innerHTML='✗ Answer: <strong>'+w.e+'</strong> ('+w.r+')'; fb.className='bf-feedback no';
     const p=document.getElementById('wbf-popup'); if(p){p.classList.add('show');wbf.hintVisible=true;}
     btn.textContent='Try again';
-    btn.onclick=()=>{inpEl.value='';inpEl.classList.remove('no');card.classList.remove('wrong-flash');
-      fb.textContent='';wbf.inputLocked=false;btn.textContent='Submit';btn.onclick=wbfSubmit;btn.disabled=false;inpEl.focus();};
+    btn.onclick = ()=>{
+  inp2.value=''; inp2.classList.remove('no'); card.classList.remove('wrong-flash');
+  fb.textContent=''; wbf.inputLocked=false;
+  btn.textContent='Submit';
+  btn.onclick=wbfSubmit;
+  inp2.focus();
+};
   }
 }
 
@@ -2467,7 +2474,7 @@ function wbfMarkMastered(idx){
       <div class="bf-complete-title">Set ${idx+1} Mastered!</div>
       <div class="bf-complete-sub">All <strong>${set.words.length} words</strong> in "<em>${set.name}</em>" drilled to completion.<br>Try Phase 3 below to test across multiple sets.</div>
       <div class="bf-complete-actions">
-        <button class="btn-ghost" onclick="wbfSelectSet(${idx})">Re-drill this set</button>
+        <button class="btn-ghost" onclick="wbf.setStatus[${idx}]={phase:'untouched',mastered:false};wbfSelectSet(${idx});buildWBFSetList()">Re-drill this set</button>
         ${nextIdx>=0?`<button class="btn-ink" style="background:#1a6b8a" onclick="wbfSelectSet(${nextIdx})">Next: Set ${nextIdx+1} →</button>`:''}
         <button class="btn-teal" onclick="document.getElementById('wbf-p3-panel').scrollIntoView({behavior:'smooth'})">Go to Phase 3 ↓</button>
       </div>
