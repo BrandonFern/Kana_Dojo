@@ -1349,6 +1349,21 @@ const SENTENCES = [
   {jp:'スーパーで 牛乳（ぎゅうにゅう）を 買（か）いました。',r:'Suupaa de gyuunyuu wo kaimashita.',e:'I bought milk at the supermarket.',v:'スーパー (supermarket — katakana) · 牛乳 (milk) · 買いました (bought)'},
   {jp:'電車（でんしゃ）で 駅（えき）まで 行（い）きます。',r:'Densha de eki made ikimasu.',e:'I go to the station by train.',v:'電車 (train) · 駅 (station) · 行きます (go)'},
   {jp:'この 道（みち）は 長（なが）いです。',r:'Kono michi wa nagai desu.',e:'This road is long.',v:'道 (road) · 長い (long)'},
+  {jp:'時間（じかん）が ありませんから、 急（いそ）ぎます。',r:'Jikan ga arimasen kara, isogimasu.',e:'Because I don\'t have time, I will hurry.',v:'時間 (time) · ありません (do not have) · から (because) · 急ぎます (hurry)'},
+  {jp:'昨日（きのう）は どこも 行（い）きませんでした。',r:'Kinou wa dokomo ikimasendeshita.',e:'I didn\'t go anywhere yesterday.',v:'昨日 (yesterday) · どこも (nowhere/anywhere with negative) · 行きませんでした (did not go)'},
+  {jp:'窓（まど）を 開（あ）けても いいですか。',r:'Mado wo akete mo ii desu ka.',e:'May I open the window?',v:'窓 (window) · 開けてもいい (may I open — permission form)'},
+  {jp:'デパートで 新（あたら）しい 靴（くつ）を 探（さが）しています。',r:'Depaato de atarashii kutsu wo sagashite imasu.',e:'I am looking for new shoes at the department store.',v:'デパート (department store) · 靴 (shoes) · 探しています (looking for)'},
+  {jp:'日本語（にほんご）で 話（はな）してください。',r:'Nihongo de hanashite kudasai.',e:'Please speak in Japanese.',v:'日本語 (Japanese language) · 話してください (please speak)'},
+  {jp:'部屋（へや）の 鍵（かぎ）を 忘（わす）れました！',r:'Heya no kagi wo wasuremashita!',e:'I forgot my room key!',v:'部屋 (room) · 鍵 (key) · 忘れました (forgot)'},
+  {jp:'傘（かさ）を 持（も）っていますか。',r:'Kasa wo motte imasu ka.',e:'Do you have an umbrella?',v:'傘 (umbrella) · 持っています (to hold/possess)'},
+  {jp:'日曜日（にちようび）は 公園（こうえん）を 散歩（さんぽ）します。',r:'Nichiyoubi wa kouen wo sanpo shimasu.',e:'On Sundays, I take a walk in the park.',v:'日曜日 (Sunday) · 公園 (park) · 散歩します (take a walk)'},
+  {jp:'冷（つめ）たい お水（みず）を 一杯（いっぱい） お願（ねが）いします。',r:'Tsumetai omizu wo ippai onegai shimasu.',e:'A glass of cold water, please.',v:'冷たい (cold to touch) · 一杯 (one glass/cup) · お願いします (please)'},
+  {jp:'この 料理（りょうり）は 少（すこ）し 辛（から）いです。',r:'Kono ryouri wa sukoshi karai desu.',e:'This dish is a little spicy.',v:'料理 (dish/cooking) · 少し (a little) · 辛い (spicy)'},
+  {jp:'会社（かいしゃ）の 後（あと）で 病院（びょういん）へ 行（い）きます。',r:'Kaisha no ato de byouin he ikimasu.',e:'I am going to the hospital after work.',v:'会社 (company/work) · 後で (after) · 病院 (hospital)'},
+  {jp:'財布（さいふ）の中に お金（かね）が いくら ありますか。',r:'Saifu no naka ni okane ga ikura arimasu ka.',e:'How much money is in the wallet?',v:'財布 (wallet) · 中 (inside) · お金 (money) · いくら (how much)'},
+  {jp:'昨日（きのう） 撮（と）った 写真（しゃしん）を 見（み）せてください。',r:'Kinou totta shashin wo misete kudasai.',e:'Please show me the photo you took yesterday.',v:'撮った (took a photo) · 写真 (photo) · 見せてください (please show)'},
+  {jp:'ホテルは 賑（にぎ）やかな 通（とお）りに あります。',r:'Hoteru wa nigiyaka na toori ni arimasu.',e:'The hotel is located on a lively street.',v:'ホテル (hotel) · 賑やか (lively/bustling) · 通り (street)'},
+  {jp:'時計（とけい）を 直（なお）す ことが できますか。',r:'Tokei wo naosu koto ga dekimasu ka.',e:'Can you fix the clock?',v:'時計 (clock/watch) · 直す (to fix) · ことができます (can do)'},
 ];
 
 // ═══════════════════════════════════════
@@ -2335,8 +2350,92 @@ const VOCAB = [
   {jp:'おうこく',h:'おうこく',t:'オウコク',r:'oukoku',e:'kingdom',c:'World'},
   {jp:'へいや',h:'へいや',t:'ヘイヤ',r:'heiya',e:'plain / open field',c:'World'},
   {jp:'みなと',h:'みなと',t:'ミナト',r:'minato',e:'harbour / port',c:'World'},
-];
 
+  // ── School & Study (10) ──
+  {jp:'べんきょう',h:'べんきょう',t:'ベンキョウ',r:'benkyou',e:'study',c:'School'},
+  {jp:'じゅぎょう',h:'じゅぎょう',t:'ジュギョウ',r:'jugyou',e:'class / lesson',c:'School'},
+  {jp:'しゅくだい',h:'しゅくだい',t:'シュクダイ',r:'shukudai',e:'homework',c:'School'},
+  {jp:'しけん',h:'しけん',t:'シケン',r:'shiken',e:'exam / test',c:'School'},
+  {jp:'きょうしつ',h:'きょうしつ',t:'キョウシツ',r:'kyoushitsu',e:'classroom',c:'School'},
+  {jp:'せいふく',h:'せいふく',t:'セイフク',r:'seifuku',e:'school uniform',c:'School'},
+  {jp:'ぶかつ',h:'ぶかつ',t:'ブカツ',r:'bukatsu',e:'club activities',c:'School'},
+  {jp:'にほんご',h:'にほんご',t:'ニホンゴ',r:'nihongo',e:'Japanese language',c:'School'},
+  {jp:'おんがく',h:'おんがく',t:'オンガク',r:'ongaku',e:'music',c:'School'},
+  {jp:'としょかん',h:'としょかん',t:'トショカン',r:'toshokan',e:'library',c:'School'},
+
+  // ── Family (10) ──
+  {jp:'おとうさん',h:'おとうさん',t:'オトウサン',r:'otousan',e:'father (polite)',c:'Family'},
+  {jp:'おかあさん',h:'おかあさん',t:'オカアサン',r:'okaasan',e:'mother (polite)',c:'Family'},
+  {jp:'おにいさん',h:'おにいさん',t:'オニイサン',r:'oniisan',e:'older brother (polite)',c:'Family'},
+  {jp:'おねえさん',h:'おねえさん',t:'オネエサン',r:'oneesan',e:'older sister (polite)',c:'Family'},
+  {jp:'おとうと',h:'おとうと',t:'オトウト',r:'otouto',e:'younger brother',c:'Family'},
+  {jp:'いもうと',h:'いもうと',t:'イモウト',r:'imouto',e:'younger sister',c:'Family'},
+  {jp:'おじいさん',h:'おじいさん',t:'オジイサン',r:'ojiisan',e:'grandfather / old man',c:'Family'},
+  {jp:'おばあさん',h:'おばあさん',t:'オバアサン',r:'obaasan',e:'grandmother / old woman',c:'Family'},
+  {jp:'かぞく',h:'かぞく',t:'カゾク',r:'kazoku',e:'family',c:'Family'},
+  {jp:'きょうだい',h:'きょうだい',t:'キョウダイ',r:'kyoudai',e:'siblings / brothers and sisters',c:'Family'},
+
+  // ── Colours (10) ──
+  {jp:'あか',h:'あか',t:'アカ',r:'aka',e:'red',c:'Colours'},
+  {jp:'あお',h:'あお',t:'アオ',r:'ao',e:'blue / green',c:'Colours'},
+  {jp:'きいろ',h:'きいろ',t:'キイロ',r:'kiiro',e:'yellow',c:'Colours'},
+  {jp:'みどり',h:'みどり',t:'ミドリ',r:'midori',e:'green',c:'Colours'},
+  {jp:'しろい',h:'しろい',t:'シロイ',r:'shiroi',e:'white',c:'Colours'},
+  {jp:'くろ',h:'くろ',t:'クロ',r:'kuro',e:'black',c:'Colours'},
+  {jp:'ちゃいろ',h:'ちゃいろ',t:'チャイロ',r:'chairo',e:'brown',c:'Colours'},
+  {jp:'むらさき',h:'むらさき',t:'ムラサキ',r:'murasaki',e:'purple',c:'Colours'},
+  {jp:'オレンジ',h:'おれんじ',t:'オレンジ',r:'orenji',e:'orange',c:'Colours'},
+  {jp:'ピンク',h:'ぴんく',t:'ピンク',r:'pinku',e:'pink',c:'Colours'},
+
+  // ── Verbs V — Everyday (10) ──
+  {jp:'あそぶ',h:'あそぶ',t:'アソブ',r:'asobu',e:'to play / to have fun',c:'Verbs V'},
+  {jp:'はたらく',h:'はたらく',t:'ハタラク',r:'hataraku',e:'to work',c:'Verbs V'},
+  {jp:'やすむ',h:'やすむ',t:'ヤスム',r:'yasumu',e:'to rest / to take a break',c:'Verbs V'},
+  {jp:'よぶ',h:'よぶ',t:'ヨブ',r:'yobu',e:'to call / to invite / to summon',c:'Verbs V'},
+  {jp:'なる',h:'なる',t:'ナル',r:'naru',e:'to become',c:'Verbs V'},
+  {jp:'いる',h:'いる',t:'イル',r:'iru',e:'to exist (animate)',c:'Verbs V'},
+  {jp:'ある',h:'ある',t:'アル',r:'aru',e:'to exist (inanimate)',c:'Verbs V'},
+  {jp:'うごく',h:'うごく',t:'ウゴク',r:'ugoku',e:'to move',c:'Verbs V'},
+  {jp:'とまる',h:'とまる',t:'トマル',r:'tomaru',e:'to stop / to stay',c:'Verbs V'},
+  {jp:'かわる',h:'かわる',t:'カワル',r:'kawaru',e:'to change / to transform',c:'Verbs V'},
+
+  // ── Game & VN IV — Isekai & Fantasy (10) ──
+  {jp:'てんせい',h:'てんせい',t:'テンセイ',r:'tensei',e:'reincarnation / transmigration',c:'Game & VN IV'},
+  {jp:'いせかい',h:'いせかい',t:'イセカイ',r:'isekai',e:'another world / different world',c:'Game & VN IV'},
+  {jp:'まりょく',h:'まりょく',t:'マリョク',r:'maryoku',e:'magic power / MP',c:'Game & VN IV'},
+  {jp:'ぼうけん',h:'ぼうけん',t:'ボウケン',r:'bouken',e:'adventure',c:'Game & VN IV'},
+  {jp:'でんせつ',h:'でんせつ',t:'デンセツ',r:'densetsu',e:'legend / legendary',c:'Game & VN IV'},
+  {jp:'ひっさつ',h:'ひっさつ',t:'ヒッサツ',r:'hissatsu',e:'sure kill / finishing move',c:'Game & VN IV'},
+  {jp:'むてき',h:'むてき',t:'ムテキ',r:'muteki',e:'invincible / unbeatable',c:'Game & VN IV'},
+  {jp:'さいきょう',h:'さいきょう',t:'サイキョウ',r:'saikyou',e:'the strongest',c:'Game & VN IV'},
+  {jp:'さいしゅう',h:'さいしゅう',t:'サイシュウ',r:'saishuu',e:'final / last',c:'Game & VN IV'},
+  {jp:'えいゆう',h:'えいゆう',t:'エイユウ',r:'eiyuu',e:'hero / great warrior',c:'Game & VN IV'},
+
+  // ── VN Adjectives (10) ──
+  {jp:'つらい',h:'つらい',t:'ツライ',r:'tsurai',e:'painful / hard / tough',c:'VN Adjectives'},
+  {jp:'はずかしい',h:'はずかしい',t:'ハズカシイ',r:'hazukashii',e:'embarrassing / shy',c:'VN Adjectives'},
+  {jp:'なつかしい',h:'なつかしい',t:'ナツカシイ',r:'natsukashii',e:'nostalgic / fondly missed',c:'VN Adjectives'},
+  {jp:'さみしい',h:'さみしい',t:'サミシイ',r:'samishii',e:'lonely',c:'VN Adjectives'},
+  {jp:'うらやましい',h:'うらやましい',t:'ウラヤマシイ',r:'urayamashii',e:'envious / jealous',c:'VN Adjectives'},
+  {jp:'たいせつ',h:'たいせつ',t:'タイセツ',r:'taisetsu',e:'important / precious / dear',c:'VN Adjectives'},
+  {jp:'ふしぎ',h:'ふしぎ',t:'フシギ',r:'fushigi',e:'mysterious / strange / wonder',c:'VN Adjectives'},
+  {jp:'せつない',h:'せつない',t:'セツナイ',r:'setsunai',e:'heartbreaking / bittersweet',c:'VN Adjectives'},
+  {jp:'もったいない',h:'もったいない',t:'モッタイナイ',r:'mottainai',e:'wasteful / what a waste',c:'VN Adjectives'},
+  {jp:'しかたない',h:'しかたない',t:'シカタナイ',r:'shikatanai',e:'cant be helped / no choice',c:'VN Adjectives'},
+
+  // ── RPG Systems (10) ──
+  {jp:'パーティ',h:'ぱーてぃ',t:'パーティ',r:'paati',e:'party / group',c:'RPG Systems'},
+  {jp:'ギルド',h:'ぎるど',t:'ギルド',r:'girudo',e:'guild',c:'RPG Systems'},
+  {jp:'みかた',h:'みかた',t:'ミカタ',r:'mikata',e:'ally / ones side',c:'RPG Systems'},
+  {jp:'せんし',h:'せんし',t:'センシ',r:'senshi',e:'warrior / fighter',c:'RPG Systems'},
+  {jp:'まほうし',h:'まほうし',t:'マホウシ',r:'mahoushi',e:'mage / wizard',c:'RPG Systems'},
+  {jp:'とうぞく',h:'とうぞく',t:'トウゾク',r:'touzoku',e:'thief / rogue',c:'RPG Systems'},
+  {jp:'どうぐ',h:'どうぐ',t:'ドウグ',r:'dougu',e:'tool / equipment / item',c:'RPG Systems'},
+  {jp:'ほうび',h:'ほうび',t:'ホウビ',r:'houbi',e:'reward / prize',c:'RPG Systems'},
+  {jp:'スキル',h:'すきる',t:'スキル',r:'sukiru',e:'skill (game ability)',c:'RPG Systems'},
+  {jp:'ステータス',h:'すてーたす',t:'ステータス',r:'suteetasu',e:'status / stats',c:'RPG Systems'},
+];
+  
 const WBF_SETS = [
   { name:'Greetings & Basics',    theme:'Essential first phrases and manners',       words: VOCAB.filter(v=>v.c==='Greetings') },
   { name:'Pronouns & People',     theme:'Who is who — people words',                 words: VOCAB.filter(v=>v.c==='Pronouns') },
@@ -2359,6 +2458,13 @@ const WBF_SETS = [
   { name:'Game & VN II — Story',  theme:'Fate, bonds, hope, love and despair',      words: VOCAB.filter(v=>v.c==='Game & VN II') },
   { name:'Game & VN III — World', theme:'Kingdoms, dungeons, quests and bosses',    words: VOCAB.filter(v=>v.c==='Game & VN III') },
   { name:'World & Settings',      theme:'Towns, castles, islands and harbours',     words: VOCAB.filter(v=>v.c==='World') },
+  { name:'School & Study',       theme:'Classroom, exams, clubs and language',        words: VOCAB.filter(v=>v.c==='School') },
+  { name:'Family',                theme:'Parents, siblings and relatives',              words: VOCAB.filter(v=>v.c==='Family') },
+  { name:'Colours',               theme:'The full colour palette in Japanese',         words: VOCAB.filter(v=>v.c==='Colours') },
+  { name:'Verbs V — Everyday',    theme:'Play, work, rest, exist, move and change',    words: VOCAB.filter(v=>v.c==='Verbs V') },
+  { name:'Game & VN IV — Isekai', theme:'Reincarnation, magic power, legends, heroes', words: VOCAB.filter(v=>v.c==='Game & VN IV') },
+  { name:'VN Adjectives',         theme:'The emotional vocabulary of visual novels',   words: VOCAB.filter(v=>v.c==='VN Adjectives') },
+  { name:'RPG Systems',           theme:'Party, guild, class, skills and rewards',     words: VOCAB.filter(v=>v.c==='RPG Systems') },
 ];
 
 // ═══════════════════════════════════════
