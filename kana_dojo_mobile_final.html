@@ -1583,7 +1583,16 @@ function bfSelectSet(idx) {
   bf.setIdx = idx;
   bf.hintVisible = false;
   const st = bf.setStatus[idx];
-  // Mastered sets reopen drill for review
+  
+  // If mastered AND re-drilling (coming from completion screen), reset to Phase 1
+  if(st.mastered && bf.redrilling) {
+    bf.redrilling = false;
+    bf.setStatus[idx].phase = 'untouched';
+    bfStartFamiliarise(idx);
+    buildBFSetList();
+    return;
+  }
+  
   if(st.mastered) {
     bfStartDrill(idx); return;
   }
@@ -1794,7 +1803,7 @@ function bfMarkSetMastered(idx) {
         Want to test your memory across multiple sets? Try <strong>Phase 3 — Cumulative Quiz</strong> below.
       </div>
       <div class="bf-complete-actions">
-        <button class="btn-ghost" onclick="bfSelectSet(${idx})">Re-drill this set</button>
+        <button class="btn-ghost" onclick="bf.redrilling=true;bfSelectSet(${idx})">Re-drill this set</button>
         ${nextIdx>=0?`<button class="btn-ink" style="background:var(--bf-accent)" onclick="bfSelectSet(${nextIdx})">Next: Set ${nextIdx+1} &#8594;</button>`:''}
         <button class="btn-gold" onclick="document.getElementById('bf-p3-panel').scrollIntoView({behavior:'smooth'})">Go to Phase 3 &#8595;</button>
       </div>
@@ -2526,8 +2535,25 @@ function buildWBFSetList() {
 function wbfSelectSet(idx) {
   wbf.setIdx=idx; wbf.hintVisible=false;
   const st=wbf.setStatus[idx];
-  if(st.mastered||st.phase==='drill'){wbfStartDrill(idx);return;}
-  wbfStartFamiliarise(idx); buildWBFSetList();
+
+  
+  if(st.mastered && wbf.redrilling) {
+    wbf.redrilling = false;
+    wbf.setStatus[idx].phase = 'untouched';
+    wbfStartFamiliarise(idx);
+    buildWBFSetList();
+    return;
+  }
+  
+  if(st.mastered) {
+    wbfStartDrill(idx); return;
+  }
+  if(st.phase==='drill') {
+    wbfStartDrill(idx); return;
+  }
+  wbfStartFamiliarise(idx);
+  buildWBFSetList();
+
 }
 
 // Phase 1
@@ -2642,7 +2668,7 @@ function wbfMarkMastered(idx){
       <div class="bf-complete-title">Set ${idx+1} Mastered!</div>
       <div class="bf-complete-sub">All <strong>${set.words.length} words</strong> in "<em>${set.name}</em>" drilled to completion.<br>Try Phase 3 below to test across multiple sets.</div>
       <div class="bf-complete-actions">
-        <button class="btn-ghost" onclick="wbfSelectSet(${idx})">Re-drill this set</button>
+        <button class="btn-ghost" onclick="wbf.redrilling=true;wbfSelectSet(${idx})">Re-drill this set</button>
         ${nextIdx>=0?`<button class="btn-ink" style="background:#1a6b8a" onclick="wbfSelectSet(${nextIdx})">Next: Set ${nextIdx+1} →</button>`:''}
         <button class="btn-teal" onclick="document.getElementById('wbf-p3-panel').scrollIntoView({behavior:'smooth'})">Go to Phase 3 ↓</button>
       </div>
