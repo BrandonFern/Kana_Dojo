@@ -1773,6 +1773,8 @@ function bfSubmit() {
     btn.onclick = ()=>{
       inp2.value=''; inp2.classList.remove('no'); card.classList.remove('wrong-flash');
       fb.textContent=''; bf.inputLocked=false;
+      btn.textContent='Submit';           // ADD THIS
+      btn.onclick=bfSubmit;
       inp2.focus();
     };
   }
