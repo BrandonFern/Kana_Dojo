@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Kana Dojo</title>
+<script>try{var t=localStorage.getItem('kd-theme');if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark');}catch(e){}</script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="logo">文字 <span>Kana Dojo</span></div>
+  <div class="header-right">
+    <nav class="nav-tabs">
+      <button class="nav-tab active" onclick="go('home')">Home</button>
+      <button class="nav-tab" onclick="go('chart')">Charts</button>
+      <button class="nav-tab" onclick="go('quiz')">Quiz</button>
+      <button class="nav-tab" onclick="go('kanji')">Kanji</button>
+      <button class="nav-tab" onclick="go('bruteforce')"> Brute Force</button>
+      <button class="nav-tab" onclick="go('vocabulary')">Vocabulary</button>
+      <button class="nav-tab" onclick="go('wordbf')">Word BF</button>
+      <button class="nav-tab" onclick="go('sentences')">Sentences</button>
+      <button class="nav-tab" onclick="go('progress')">Progress</button>
+    </nav>
+    <button class="theme-btn" id="themeToggle" onclick="toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark/light mode">Dark</button>
+  </div>
+</header>
+
+<!-- ═══════ HOME ═══════ -->
+<div class="section active" id="home">
+  <div class="hero">
+    <div class="hero-kanji">日本語</div>
+    <div class="hero-sub">Your complete path to Hiragana · Katakana · Kanji mastery</div>
+    <div class="mode-cards">
+      <div class="mode-card" onclick="go('chart')">
+        <div class="mode-icon"></div>
+        <div class="mode-title">Reference Charts</div>
+        <div class="mode-desc">Full hiragana & katakana tables with romaji. Study every character at a glance.</div>
+      </div>
+      <div class="mode-card" onclick="go('quiz')">
+        <div class="mode-icon"></div>
+        <div class="mode-title">Flash Quiz</div>
+        <div class="mode-desc">Multiple-choice speed drills with streak tracking. Build recognition fast.</div>
+      </div>
+      <div class="mode-card" onclick="go('kanji')">
+        <div class="mode-icon">漢</div>
+        <div class="mode-title">Kanji Reference</div>
+        <div class="mode-desc">248 essential kanji with hiragana, katakana readings and English meanings.</div>
+      </div>
+      <div class="mode-card bf" onclick="go('bruteforce')">
+        <div class="mode-icon"></div>
+        <div class="mode-title">Brute Force Mode</div>
+        <div class="mode-desc">Themed sets. Familiarise → drill → prove mastery. Builds cumulatively across sets.</div>
+      </div>
+      <div class="mode-card" onclick="go('vocabulary')">
+        <div class="mode-icon"></div>
+        <div class="mode-title">Vocabulary Reference</div>
+        <div class="mode-desc">281 words with Japanese, hiragana, katakana, romaji and English. Filter by category or search.</div>
+      </div>
+      <div class="mode-card bf" onclick="go('wordbf')">
+        <div class="mode-icon"></div>
+        <div class="mode-title">Word Brute Force</div>
+        <div class="mode-desc">Learn vocabulary the hard way — 3 phases, 28 sets. See the Japanese and type the meaning.</div>
+      </div>
+      <div class="mode-card" onclick="go('sentences')">
+        <div class="mode-icon"></div>
+        <div class="mode-title">Read Sentences</div>
+        <div class="mode-desc">Real Japanese sentences mixing kana & kanji. Reveal readings and meanings.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ CHARTS ═══════ -->
+<div class="section" id="chart">
+  <div class="sec-title">Kana Reference Charts</div>
+  <div class="sec-sub">Hover any character to highlight it. Switch between scripts below.</div>
+  <div class="toggle-row">
+    <button class="tog active" onclick="showChart('hiragana',this)">Hiragana ひらがな</button>
+    <button class="tog" onclick="showChart('katakana',this)">Katakana カタカナ</button>
+  </div>
+  <div id="chart-out"></div>
+</div>
+
+<!-- ═══════ QUIZ ═══════ -->
+<div class="section" id="quiz">
+  <div class="sec-title">Flash Quiz</div>
+  <div class="toggle-row" id="quiz-sets">
+    <button class="tog active" onclick="setSet('hiragana',this)">Hiragana</button>
+    <button class="tog" onclick="setSet('katakana',this)">Katakana</button>
+    <button class="tog" onclick="setSet('both',this)">Both Scripts</button>
+    <button class="tog" onclick="setSet('kanji',this)">Kanji Meanings</button>
+    <button class="tog" onclick="setSet('vocab',this)">Vocabulary</button>
+  </div>
+  <div class="score-bar">
+    <div class="score-item"><div class="dot g"></div><span id="qc">0</span>&nbsp;correct</div>
+    <div class="score-item"><div class="dot r"></div><span id="qw">0</span>&nbsp;wrong</div>
+    <div class="score-item"><div class="dot b"></div>streak&nbsp;<span id="qs">0</span></div>
+    <div style="margin-left:auto;font-size:.78rem;color:var(--muted)" id="qpool"></div>
+  </div>
+  <div class="flashcard-wrap" onclick="flip()">
+    <div class="flashcard" id="fc">
+      <div class="card-face front">
+        <div class="card-kana" id="cq">あ</div>
+        <div class="card-hint">Tap card to flip</div>
+      </div>
+      <div class="card-face back">
+        <div class="card-answer" id="ca">a</div>
+        <div class="card-answer-sub" id="ca2"></div>
+      </div>
+    </div>
+  </div>
+  <div class="feedback-msg" id="fb"></div>
+  <div class="quiz-choices" id="choices"></div>
+  <div class="quiz-actions">
+    <button class="btn-ghost" onclick="nextQ()">Skip →</button>
+    <button class="btn-ink" onclick="nextQ()">Next Card</button>
+  </div>
+</div>
+
+<!-- ═══════ KANJI REFERENCE ═══════ -->
+<div class="section" id="kanji">
+  <div class="sec-title">Essential Kanji</div>
+  <div class="sec-sub">Hiragana reading (red) · Katakana reading (blue) · English meaning · Radical hint (gold)</div>
+  <div class="toggle-row" id="kf"></div>
+  <div class="kanji-grid" id="kg"></div>
+</div>
+
+<!-- ═══════ BRUTE FORCE ═══════ -->
+<div class="section" id="bruteforce">
+  <div class="sec-title"> Brute Force Mode</div>
+  <div class="sec-sub">Phase 1: Familiarise with hints shown. Phase 2: Drill with hints hidden. Jump to any set freely. Use Phase 3 below for a full cumulative test anytime.</div>
+  <div class="bf-layout">
+    <!-- Set list -->
+    <div class="bf-set-list" id="bf-set-list"></div>
+    <!-- Arena -->
+    <div class="bf-arena" id="bf-arena">
+      <div style="text-align:center;padding:60px 20px;color:var(--muted)">
+        <div style="font-size:3rem;margin-bottom:12px"></div>
+        <div style="font-family:'Shippori Mincho',serif;font-size:1.2rem;margin-bottom:8px">Select a set to begin</div>
+        <div style="font-size:.85rem">Choose any set from the list on the left to start training.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3 PANEL -->
+  <div class="bf-p3-panel" id="bf-p3-panel">
+    <div class="bf-p3-header">
+      <span class="bf-p3-badge">Phase 3</span>
+      <span class="bf-p3-title"> Cumulative Quiz</span>
+    </div>
+    <div class="bf-p3-sub">
+      Select any combination of sets and test your recall across all their kanji — 2 correct reps per kanji. Hit the kanji to peek at the hint. Results summary shown when done.
+    </div>
+    <div class="bf-p3-set-grid" id="bf-p3-chips"></div>
+    <div class="bf-p3-selector-actions">
+      <button class="btn-ghost" style="padding:6px 14px;font-size:.82rem" onclick="p3SelectAll()">Select All</button>
+      <button class="btn-ghost" style="padding:6px 14px;font-size:.82rem" onclick="p3SelectNone()">Clear</button>
+      <button class="btn-ghost" style="padding:6px 14px;font-size:.82rem" onclick="p3SelectMastered()">Mastered Only</button>
+      <span class="bf-p3-count-info" id="bf-p3-count">0 kanji selected</span>
+    </div>
+    <div class="bf-p3-launch">
+      <button class="btn-gold" id="bf-p3-launch-btn" onclick="p3Launch()" disabled>Launch Cumulative Quiz &#8594;</button>
+    </div>
+    <div id="bf-p3-arena" style="margin-top:24px"></div>
+  </div>
+</div>
+
+<!-- ======= VOCABULARY REFERENCE ======= -->
+<div class="section" id="vocabulary">
+  <div class="sec-title">Vocabulary Reference</div>
+  <div class="sec-sub">All words with Japanese, hiragana, katakana, romaji and English. Filter by category or search.</div>
+  <div class="vocab-filter-row">
+    <input class="vocab-search" id="vocab-search" type="text" placeholder="Search English, romaji or Japanese..." oninput="buildVocab()">
+  </div>
+  <div id="vocab-cat-filters" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px"></div>
+  <div class="vocab-count" id="vocab-count"></div>
+  <div class="vocab-table-wrap">
+    <table class="vocab-table">
+      <thead><tr>
+        <th>Japanese</th><th>Hiragana</th><th>Katakana</th><th>Romaji</th><th>English</th><th>Category</th>
+      </tr></thead>
+      <tbody id="vocab-tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ======= WORD BRUTE FORCE ======= -->
+<div class="section" id="wordbf">
+  <div class="sec-title">Word Brute Force</div>
+  <div class="sec-sub">Phase 1 shows all four forms as a hint. Phase 2 hides them — tap the word to peek. Phase 3 is your cumulative proof across sets.</div>
+  <div class="bf-layout">
+    <div class="bf-set-list" id="wbf-set-list"></div>
+    <div class="bf-arena" id="wbf-arena">
+      <div style="text-align:center;padding:60px 20px;color:var(--muted)">
+        <div style="font-size:3rem;margin-bottom:12px"></div>
+        <div style="font-family:'Shippori Mincho',serif;font-size:1.2rem;margin-bottom:8px">Select a vocabulary set to begin</div>
+        <div style="font-size:.85rem">Choose any set from the list to start training.</div>
+      </div>
+    </div>
+  </div>
+  <div class="bf-p3-panel" id="wbf-p3-panel">
+    <div class="bf-p3-header">
+      <span class="bf-p3-badge">Phase 3</span>
+      <span class="bf-p3-title"> Word Cumulative Quiz</span>
+    </div>
+    <div class="bf-p3-sub">Select vocabulary sets and test your recall — 2 correct reps per word. See the Japanese word and type the English meaning.</div>
+    <div class="bf-p3-set-grid" id="wbf-p3-chips"></div>
+    <div class="bf-p3-selector-actions">
+      <button class="btn-ghost" style="padding:6px 14px;font-size:.82rem" onclick="wp3SelectAll()">Select All</button>
+      <button class="btn-ghost" style="padding:6px 14px;font-size:.82rem" onclick="wp3SelectNone()">Clear</button>
+      <button class="btn-ghost" style="padding:6px 14px;font-size:.82rem" onclick="wp3SelectMastered()">Mastered Only</button>
+      <span class="bf-p3-count-info" id="wbf-p3-count">0 words selected</span>
+    </div>
+    <div class="bf-p3-launch">
+      <button class="btn-teal" id="wbf-p3-launch-btn" onclick="wp3Launch()" disabled>Launch Word Quiz →</button>
+    </div>
+    <div id="wbf-p3-arena" style="margin-top:24px"></div>
+  </div>
+</div>
+
+<!-- ═══════ SENTENCES ═══════ -->
+<div class="section" id="sentences">
+  <div class="sec-title">Read Japanese Sentences</div>
+  <div class="sec-sub">Challenge yourself to read each sentence, then reveal reading and meaning.</div>
+  <div id="sl"></div>
+</div>
+
+<!-- ═══════ PROGRESS ═══════ -->
+<div class="section" id="progress">
+  <div class="sec-title">Your Progress</div>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-num" id="pc">0</div><div class="stat-lbl">Correct Answers</div></div>
+    <div class="stat-card"><div class="stat-num" id="pa">—</div><div class="stat-lbl">Accuracy</div></div>
+    <div class="stat-card"><div class="stat-num" id="pb">0</div><div class="stat-lbl"> Best Streak</div></div>
+    <div class="stat-card"><div class="stat-num" id="pseen">0</div><div class="stat-lbl">Characters Seen</div></div>
+    <div class="stat-card"><div class="stat-num" id="pbf">0</div><div class="stat-lbl"> BF Sets Mastered</div></div>
+  </div>
+  <div class="tips-box">
+    <div style="font-family:'Shippori Mincho',serif;font-size:1.05rem;margin-bottom:14px">Study Tips for Real Fluency</div>
+    <div class="tip"> <strong>Daily 10 minutes</strong> crushes occasional 2-hour sessions. Consistency is the whole game.</div>
+    <div class="tip"> <strong>Brute Force sets</strong> — the familiarisation phase is NOT cheating. Looking at meanings first is proven neuroscience.</div>
+    <div class="tip"> <strong>Spaced repetition</strong> — the cumulative review after each set ensures older kanji don't fade.</div>
+    <div class="tip">✍ <strong>Write by hand</strong> while drilling — muscle memory dramatically speeds recognition.</div>
+    <div class="tip"> <strong>Use radicals</strong> as anchors — 木 (tree) appears in 森 (forest), 林 (woods), 校 (school). Spot the pattern.</div>
+    <div class="tip"> <strong>Target</strong>: 46 hiragana in ~1 week · 46 katakana in week 2 · 1 BF kanji set per day from week 3.</div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
